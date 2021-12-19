@@ -35,28 +35,36 @@
     <div class="small-container single-product">
         <div class="row">
             <div class="col-2">
-                <img src="{{ asset('images/gallery-1.jpg')}}" width="100%" id="ProductImg">
+                <img src="{{ asset($images[0])}}" width="100%" id="ProductImg">
 
                 <div class="small-img-row">
+                    @if (isset($images[0]))
                     <div class="small-img-col">
-                        <img src="{{ asset('images/gallery-1.jpg')}}" width="100%" class="small-img">
+                        <img src="{{ asset($images[0])}}" width="100%" class="small-img">
                     </div>
+                    @endif
+                    @if (isset($images[1]))
                     <div class="small-img-col">
-                        <img src="{{ asset('images/gallery-2.jpg')}}" width="100%" class="small-img">
+                        <img src="{{ asset($images[1])}}" width="100%" class="small-img">
                     </div>
+                    @endif
+                    @if (isset($images[2]))
                     <div class="small-img-col">
-                        <img src="{{ asset('images/gallery-3.jpg')}}" width="100%" class="small-img">
+                        <img src="{{ asset($images[2])}}" width="100%" class="small-img">
                     </div>
+                    @endif
+                    @if (isset($images[3]))
                     <div class="small-img-col">
-                        <img src="{{ asset('images/gallery-4.jpg')}}" width="100%" class="small-img">
+                        <img src="{{ asset($images[3])}}" width="100%" class="small-img">
                     </div>
+                    @endif
                 </div>
 
             </div>
             <div class="col-2">
-                <p>Home / T-Shirt</p>
-                <h1>Red Printed T-Shirt by HRX</h1>
-                <h4>$50.00</h4>
+                <p>{{ $product->category->category_name }}</p>
+                <h1>{{ $product->name }}X</h1>
+                <h4>{{ $product->price }}</h4>
                 <select>
                     <option>Select Size</option>
                     <option>XXL</option>
@@ -70,8 +78,7 @@
 
                 <h3>Product Details <i class="fa fa-indent"></i></h3>
                 <br>
-                <p>Give your summer wardrobe a style upgrade with the HRX Men's Active T-Shirt. Team it with a pair of
-                    shorts for your morning workout or a denims for an evening out with the guys.</p>
+                <p>{{ $product->details }}</p>
             </div>
         </div>
     </div>
@@ -79,15 +86,16 @@
     <div class="small-container">
         <div class="row row-2">
             <h2>Related Products</h2>
-            <p>View More</p>
+           <a href="/products"<p>View More</p></a>
         </div>
     </div>
     <!-- Products -->
     <div class="small-container">
         <div class="row">
+            @foreach ($related_products as $rel_product )
             <div class="col-4">
-                <img src="{{ asset('images/product-9.jpg')}}">
-                <h4>Red Printed T-Shirt</h4>
+                <a href="{{ url('/products/'.$rel_product->id) }}"> <img src="{{ asset(explode('|', $rel_product->image)[0])}}"></a>
+                <h4>{{ $rel_product->name}}</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -95,44 +103,10 @@
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star-o"></i>
                 </div>
-                <p>$50.00</p>
+                <p>{{ $rel_product->price}}</p>
             </div>
-            <div class="col-4">
-                <img src="{{ asset('images/product-10.jpg')}}">
-                <h4>Red Printed T-Shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{{ asset('images/product-11.jpg')}}">
-                <h4>Red Printed T-Shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{{ asset('images/product-12.jpg')}}">
-                <h4>Red Printed T-Shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>$50.00</p>
-            </div>
+            @endforeach
+
         </div>
     </div>
 

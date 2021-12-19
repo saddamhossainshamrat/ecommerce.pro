@@ -26,7 +26,7 @@
                             @csrf
                             <input type="text" name="uname" placeholder="Username" required>
                             <input type="email" name="email" placeholder="Email">
-                            <input type="text" name="mobile" placeholder="Mobile">
+                            <input type="text" name="mobile" placeholder="Mobile No.">
                             <input type="password" name="pass" placeholder="Password" required>
                             <button type="submit" class="btn">Register</button>
                         </form>

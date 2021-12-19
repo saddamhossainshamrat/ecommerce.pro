@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/products', function () {
-    return view('products');
-});
+// Route::get('/products', function () {
+//     return view('products');
+// });
 
 Route::get('/product_details', function () {
     return view('product_details');
@@ -32,3 +32,6 @@ Route::get('/account', function () {
 Route::get('/cart', function () {
     return view('cart');
 });
+Route:: resource(name: '/products', controller: \App\Http\Controllers\ProductController::class);
+Route:: resource(name: '/users', controller: \App\Http\Controllers\UserController::class);
+Route:: get('/admin_products', '\App\Http\Controllers\ProductController@addProduct');
