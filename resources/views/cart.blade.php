@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 </head>
 
 <body>
@@ -19,8 +22,8 @@
             </div>
             <nav>
                 <ul id="MenuItems">
-                    <li><a href="{{ url('/')}}>Home</a></li>
-                    <li><a href="{{ url('/products')}}>Products</a></li>
+                    <li><a href="{{ url('/')}}">Home</a></li>
+                    <li><a href="{{ url('/products')}}">Products</a></li>
                     <li><a href="">About</a></li>
                     <li><a href="">Contact</a></li>
                     <li><a href="{{ url('/account')}} >Account</a></li>
@@ -33,71 +36,47 @@
 
     <!-- Cart items details -->
     <div class="small-container cart-page">
+        @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
         <table>
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
+            @foreach ($carts as $cart )
+
+
             <tr>
                 <td>
                     <div class="cart-info">
-                        <img src="{{ asset('images/buy-1.jpg')}}">
+                        <img src="{{asset($cart->options['image'])}}">
                         <div>
-                            <p>Red Printed T-Shirt</p>
-                            <small>Price: $50.00</small>
+                            <p>{{ $cart->name }}</p>
+                            <small>Price: ${{ $cart->price }}</small>
                             <br>
-                            <a href="">Remove</a>
+                            <a href="{{ url('/remove-item/'. $cart->rowId) }}">Remove</a>
                         </div>
                     </div>
                 </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
+                <td>{{ $cart->qty }}</td>
+                <td>{{ $cart->options['total'] }}</td>
             </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="{{ asset('images/buy-2.jpg')}}">
-                        <div>
-                            <p>Red Printed T-Shirt</p>
-                            <small>Price: $50.00</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="{{ asset('images/buy-3.jpg')}}">
-                        <div>
-                            <p>Red Printed T-Shirt</p>
-                            <small>Price: $50.00</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
-            </tr>
+           @endforeach
         </table>
         <div class="total-price">
             <table>
                 <tr>
                     <td>Subtotal</td>
-                    <td>$200.00</td>
+                    <td>{{ $subTotal }}</td>
                 </tr>
+
                 <tr>
-                    <td>Tax</td>
-                    <td>$35.00</td>
-                </tr>
-                <tr>
-                    <td>Total</td>
-                    <td>$230.00</td>
+
+                    <td><button class="btn btn-success">Checkout</button></td>
                 </tr>
             </table>
         </div>
@@ -145,7 +124,10 @@
     </div>
 
     <!-- javascript -->
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
     <script>
         var MenuItems = document.getElementById("MenuItems");
         MenuItems.style.maxHeight = "0px";

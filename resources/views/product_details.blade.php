@@ -64,17 +64,23 @@
             <div class="col-2">
                 <p>{{ $product->category->category_name }}</p>
                 <h1>{{ $product->name }}X</h1>
-                <h4>{{ $product->price }}</h4>
-                <select>
-                    <option>Select Size</option>
-                    <option>XXL</option>
-                    <option>XL</option>
-                    <option>L</option>
-                    <option>M</option>
-                    <option>S</option>
+                <h4>Price: {{ $product->price }}</h4>
+                <form method="POST" action="/add-to-cart">
+                    @csrf
+                <select name="size">
+                    <option value="">Select Size</option>
+                    <option value="XXL">XXL</option>
+                    <option value="XL">XL</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="S">S</option>
                 </select>
-                <input type="number" value="1">
-                <a href="" class="btn">Add To Cart</a>
+                <input type="hidden" name="pid" value="{{ $product->id }}">
+                <input type="hidden" name="price" value="{{ $product->price }}">
+                <input type="hidden" name="name" value="{{ $product->name }}">
+                <label>Amount</label><input name="amount" type="number" value="1">
+                <button type="submit" class="btn">Add To Cart</button>
+                </form>
 
                 <h3>Product Details <i class="fa fa-indent"></i></h3>
                 <br>
