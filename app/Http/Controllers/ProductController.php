@@ -165,4 +165,11 @@ class ProductController extends Controller
         Cart::remove($rowId);
         return redirect('/cart')->with('success', 'Product Removed Successfully !');
     }
+    public function home(){
+
+        $featured_products= Product::orderBy('price', 'desc')->limit(4)->get();
+        $latest_products= Product::orderBy('created_at', 'desc')->limit(2)->get();
+
+        return view('welcome', compact('featured_products', 'latest_products'));
+    }
 }
