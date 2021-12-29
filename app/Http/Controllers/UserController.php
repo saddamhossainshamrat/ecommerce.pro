@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->middleware('checkuser')->only('store');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +22,9 @@ class UserController extends Controller
        $userInfo = User::where('name','=', $uName)->where('password', '=', $pass)->first();
 
        if(isset($userInfo)&& $userInfo!=null){
-           return redirect('/admin_products');
+           $product_controller= new ProductController();
+           return $product_controller->addProduct();
+           //return redirect('/admin_products');
        }else{
            return redirect()->back();
        }
@@ -99,3 +104,6 @@ class UserController extends Controller
     }
 
 }
+
+
+
