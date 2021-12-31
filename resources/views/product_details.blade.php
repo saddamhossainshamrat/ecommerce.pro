@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf_token" content="{{ csrf_token }}">
+    <meta name="csrf_token" content="{{ csrf_token() }}">
     <title>All Products | RedStore</title>
     <link rel="stylesheet" href="{{ url('/css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -63,6 +65,9 @@
 
             </div>
             <div class="col-2">
+                <div id="error_message">
+
+                </div>
                 <p>{{ $product->category->category_name }}</p>
                 <h1>{{ $product->name }}X</h1>
                 <h4>Price: {{ $product->price }}</h4>
@@ -79,7 +84,7 @@
                 <input type="hidden" name="pid" value="{{ $product->id }}">
                 <input type="hidden" name="price" value="{{ $product->price }}">
                 <input type="hidden" name="name" value="{{ $product->name }}">
-                <label>Amount</label><input name="amount" type="number" value="1" onchange="validateAmount(this.value, {{ $product->id }} )">
+                <label>Amount</label><input name="amount" id="qty" type="number" value="1" onchange="validateAmount(this.value, {{ $product->id }} )">
                 <button type="submit" class="btn">Add To Cart</button>
                 </form>
 
@@ -159,7 +164,12 @@
     </div>
 
     <!-- javascript -->
-<script type="text/javascript" src="/js/custom.js">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/custom.js"></script>
+
     <script>
         var MenuItems = document.getElementById("MenuItems");
         MenuItems.style.maxHeight = "0px";
