@@ -76,7 +76,7 @@
 
                 <tr>
 
-                    <td><button class="btn btn-success">Checkout</button></td>
+                    <td><button class="btn btn-success" onclick="window.location= '{{ "example1" }}'">Checkout</button></td>
                 </tr>
             </table>
         </div>
